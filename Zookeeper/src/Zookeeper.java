@@ -1,21 +1,90 @@
 import java.io.File;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Zookeeper {
     public static void main(String[] args) {
+        File hippo = new File("Hippo.text");
+        File tiger = new File("Tiger.text");
+        File camel = new File("Camel.text");
+        File aardvark = new File("Aardvark.text");
 
-        System.out.println("What camera do you want to see: ");
-        System.out.println("1. Camel\n2.Hippo");
-        Scanner input = new Scanner(System.in);
-        int cameraChoice = input.nextInt();
-        if(cameraChoice == 1){
-            printCamel();
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("What habitat would you like to look at?");
+        System.out.println("1. Hippo\n2. Camel\n3. Tiger\n4. Aardvark");
+        int habitat = scan.nextInt();
+
+        switch (habitat){
+            case 1:
+                printInfo("Hippo");
+                printAnimal(hippo);
+                break;
+
+            case 2:
+                printInfo("Camel");
+                printAnimal(camel);
+                break;
+
+            case 3:
+                printInfo("Tiger");
+                printAnimal(tiger);
+                break;
+
+            case 4:
+                printInfo("Aardvark");
+                printAnimal(aardvark);
+                break;
+
+            default:
+                break;
         }
-        else if(cameraChoice == 2){
-            ;
+    }
+
+    public static void printInfo(String animal){
+        double min = 50.0, max = 100.0;
+        double weather = min + (Math.random() * ((max - min) + 1));
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formattedTime = currentTime.format(format);
+
+        System.out.println("Current Habitat: " + animal);
+        System.out.print("Current Time: ");
+
+        int hours1 = (int) formattedTime.charAt(0) - '0';
+        int hours2 = (int) formattedTime.charAt(1) - '0';
+
+        int hours = hours1 * 10 + hours2;
+
+        String amOrPm;
+        if (hours < 12) {
+            amOrPm = "AM";
+            hours += 12;
+        } else {
+            amOrPm = "PM";
+            hours -= 12;
+        }
+        hours %= 12;
+
+        if (hours == 0) {
+            System.out.print("12");
+
+            for (int i = 2; i < 8; ++i) {
+                System.out.print(formattedTime.charAt(i));
+            }
+        } else {
+            System.out.print(hours);
+            for (int i = 2; i < 8; ++i) {
+                System.out.print(formattedTime.charAt(i));
+            }
         }
 
-        File file = new File("Zookeeper/animals/hippo.txt");
+        System.out.println(" " + amOrPm);
+        System.out.printf("Habitat Temp: %.2fF", weather);
+    }
+
+    public static void printAnimal(File file){
         try{
             Scanner fr = new Scanner(file);
             while(fr.hasNextLine()){
@@ -23,41 +92,7 @@ public class Zookeeper {
                 System.out.println(i);
             }
         } catch (Exception e){
-            System.out.println("No file");
+            System.out.println("\nNo file!");
         }
-    }
-
-    public static void printCamel(){
-        String animalType = "Camel";
-        String time = "4:37PM";
-        double habitatTemp = 59.66;
-        System.out.println("Animal type: " + animalType);
-        System.out.println("Current time: " + time);
-        System.out.println("Habitat temperature: " + habitatTemp+"F");
-
-
-        String camel = """
-            Look at our camel
-            
-             ___.-''''-.
-            /___  @    |
-            ',,,,.     |         _.'''''''._
-                 '     |        /           \\
-                 |     \\    _.-'             \\
-                 |      '.-'                  '-.
-                 |                               ',
-                 |                                '',
-                  ',,-,                           ':;
-                       ',,| ;,,                 ,' ;;
-                          ! ; !'',,,',',,,,'!  ;   ;:
-                         : ;  ! !       ! ! ;  ;   :;
-                         ; ;   ! !      ! !  ; ;   ;,
-                        ; ;    ! !     ! !   ; ;     
-                        ; ;    ! !    ! !     ; ;
-                       ;,,      !,!   !,!     ;,;
-                       /_I      L_I   L_I     /_I
-        
-                """;
-        System.out.println(camel);
     }
 }
