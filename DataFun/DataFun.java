@@ -11,8 +11,9 @@ public class DataFun {
         Scanner sc = new Scanner(System.in);
         System.out.print("What is your favorite integer?");
         int userNum = sc.nextInt();
-        char userChar = sc.next().charAt(0);
         favNum(userNum);
+        System.out.print("What is your favorite character?");
+        char userChar = sc.next().charAt(0);
         favChar(userChar);
     }
 
@@ -20,25 +21,23 @@ public class DataFun {
     public static void favNum(int num) {
         if (num >= 0){
             System.out.println("\n" + num + " is a positive number,");
-        }
-        else {
+        } else {
             System.out.println(num + " is a negative number,");
         }
 
         if (num > 1000){
             System.out.println("\nit is greater than 1000,");
-        }
-        else if (num > 100){
+        } else if (num > 100){
             System.out.println("\nit is greater than 100,");
-        }
-        else if (num > 10){
+        } else if (num > 10){
             System.out.println("\nit is greater than 10,");
+        } else {
+            System.out.println("\nit is not greater than 10,");
         }
 
         if (num % 2 == 0){
             System.out.println("\nit is even,");
-        }
-        else {
+        } else {
             System.out.println("\nit is odd,");
         }
 
@@ -78,17 +77,49 @@ public class DataFun {
     }
 
     public static void favChar(char a){
-        int ascii = a;
-        char[] vowel = {'a','e','i','o','u'};
+        String vowels = "aeiou";
+        String str = Character.toString(a);
+        String properNum;
+        int index = 0;
 
-        if (ascii >= 48 && ascii <= 57){
+
+        if (Character.isDigit(a)){
             System.out.println("\n" + a + " is a number,");
-        }
-        else if (ascii >= 65 && ascii <= 90){
+        } else if ( Character.isLetter(a) && Character.isUpperCase(a)){
             System.out.println("\n" + a + " is a uppercase letter,");
-        }
-        else if (ascii >= 97 && ascii <= 122){
+        } else if (Character.isLetter(a) && Character.isLowerCase(a)){
             System.out.println("\n" + a + " is a lowercase letter,");
         }
+
+        if (Character.isLetter(a)){
+            if (!vowels.contains(str.toLowerCase())) {
+                System.out.println("\nit is not a vowel,");
+            } else {
+                System.out.println("\nit is a vowel,");
+            }
+        }
+
+        System.out.println("\nits ASCII value is " + (int) a + ",");
+
+        if (Character.isLetter(a)){
+            index = (int) a - (int) 'a' + 1;
+        } else if (Character.isDigit(a)) {
+            index = (int) a - (int) '0' + 1;
+
+        }
+
+        properNum = switch (index) {
+            case 1, 11, 21 -> index + "st";
+            case 2, 12, 22 -> index + "nd";
+            case 3, 13, 23 -> index + "rd";
+            default -> index + "th";
+        };
+
+        if (Character.isLetter(a)) {
+            System.out.println("\nand it is the " + properNum + " letter of the alphabet.");
+        } else if (Character.isDigit(a)){
+            System.out.println("\nand it is the " + properNum + " digit.");
+        }
+
     }
 }
