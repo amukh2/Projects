@@ -1,4 +1,4 @@
-# Zookeeper Project
+# Zookeeper.Zookeeper Project
 A zoo is a large, complex place with many animals that all need care. It is unrealistic for there to a staff member assigned to each animal to track their need and behavior at all times. One of the employees has suggested that we use cameras instead. She would like to be able to pull up a video feed of any animal in the zoo that also displays the animal type, the current time, and the current temperature in the habitat.
 
 ## Task 1 - Print animal information (Unit 1)
@@ -72,4 +72,11 @@ To earn an A, you must use a switch statement rather than an if-else if-else cha
 
 Continue to prompt the user to select a camera unless they enter -1.
 
-## Task 5 - In Progress
+## Task 5 - Classes and ArrayLists
+
+* Create a Habitat class that allows you to store and/or modify all necessary information about the habitat.
+* Make an ArrayList that stores the Habitat objects.
+* Rather than hard coded options, use the ArrayList to display all of the cameras.
+* Add an option to the menu that allows someone to add a habitat. Do not allow them to add a habitat with the same name
+    * You can leave out a prompt for the image OR you can prompt them for a file name
+
